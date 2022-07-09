@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="overlay" style="visiblity: hidden;">
+        <div class="notes" id="app">
+            <div class="notes-notebook-sidebar">
+                <h1 class="app-title">
+                    MyWorkbookApp
+                </h1>
+                <div class="notes-notebook">
+                    <i class="fa-solid fa-circle-user fa-2x"></i>
+                    <h2 class="notes-user"></h2>
+                    <div class="notes-notebooks">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Notebooks</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <ul class="notes-notebook-list">
+                        <!-- <li class="notes-notebook-list-item"><i class="fa-solid fa-layer-group" style="padding-right: 10px;"></i>HTML 5</li>
+                        <li class="notes-notebook-list-item"><i class="fa-solid fa-layer-group" style="padding-right: 10px;"></i>CSS 3</li>
+                        <li class="notes-notebook-list-item"><i class="fa-solid fa-layer-group" style="padding-right: 10px;"></i>JS</li>
+                        <li class="notes-notebook-list-item"><i class="fa-solid fa-layer-group" style="padding-right: 10px;"></i>React</li> -->
+                    </ul>
+                </div>
+                <button type="button" class="notes-logout-btn">Log out</button>
+            </div>
+            <div class="notes-sidebar">
+                <button type="button" class="notes-sidebar-btn">Add new note</button>
+                <div class="notes-sidebar-list">
+                    <!-- <div class="notes-sidebar-list-item notes-sidebar-list-item--selected">
+                        <div class="small-note-title">Untitled</div>
+                        <div class="small-note-body">Lorem ipsum dolor sit amet</div>
+                        <div class="small-note-time">05 / 07 / 2022</div>
+                    </div>
+                    <div class="notes-sidebar-list-item">
+                        <div class="small-note-title">Sample Note</div>
+                        <div class="small-note-body">Lorem ipsum dolor sit amet</div>
+                        <div class="small-note-time">04 / 07 / 2022</div>
+                    </div>
+                    <div class="notes-sidebar-list-item">
+                        <div class="small-note-title">Test Note</div>
+                        <div class="small-note-body">Lorem ipsum dolor sit amet</div>
+                        <div class="small-note-time">03 / 07 / 2022</div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="notes-preview">
+                <!-- <input type="text" class="notes-preview-title" value="Untitled" />
+                <textarea class = "notes-preview-body"></textarea> -->
+
+                <!--<div class="section">
+                        <div class="section-title-container">
+                            <div class="section-title" contenteditable>Storage</div>
+                            <i class="fa-solid fa-trash"></i>
+                        </div>
+                        <div class="section-body" contenteditable></div>
+                    </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <div class = "create-nb-dialog" style="display: none;">
+        <div class="dialog-header">
+            <h2 class="create-nb-dialog-title">Create a new notebook</h2>
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <p class="create-nb-dialog-description">Notebooks are useful for grouping notes around a common topic.</p>
+        <div>Name</div>
+        <input type = "text" />
+        <button type="button" class="create-nb-dialog-btn" disabled>Create</button>
+    </div>
+    <div class="desktop-only-support-ui" style = "display: none;">
+        <div class = "fallback-ui-card">
+            <i class="fa-solid fa-face-frown"></i>
+            <h1>Woops!!!</h1>
+            <h3>MyWorkbookApp currently supports only on Desktop <i class="fa-solid fa-desktop"></i></h3>
+            <h4>Mobile<i class="fa-solid fa-mobile"></i> version is coming soon!!!</h4>
+        </div>
+    </div>
+
+
+    <!-- Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js" integrity="sha512-M72KfQy4kPuLYC6CeTrN0eA17U1lXEMrr5qEJC/40CLdZGC3HpwPS0esQLqBHnxty2FIcuNdP9EqwSOCLEVJXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://kit.fontawesome.com/020c091134.js" crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  // box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+  }
+  
+  .login-form {
+    padding: 2rem;
+    width: 400px;
+    background:black;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-family: sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    font-family: 'Open Sans',sans-serif;
+
+      & h1 {
+        color: #7719AA;
+        align-self: center;
+        font-weight: 100;
+      }
+
+      label {
+        font-size: 1rem;
+      }
+      
+      #login-username, #login-password {
+        width: initial;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        background-color: #555;
+        color: whitesmoke;
+        border-radius: 5px;
+        font-family: inherit;
+ 
+      }
+      
+      .login-form-btns {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .login-form-btns a {
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #7719AA;
+      /*   color: #8c27c2; */
+        border: 2px solid #7719AA;
+        outline: none;
+        cursor: pointer;
+        margin-top: 1rem;
+        border-radius: 5px;
+      }
+      
+      .login-form-btns a:hover {
+        color: #8c27c2;
+        border: 2px solid #8c27c2;
+      }
+      
+      .login-btn {
+        padding: 10px 20px;
+        background-color: #7719AA;
+        border: 2px solid #7719AA;
+        color: whitesmoke;
+        outline: none;
+        cursor: pointer;
+        margin-top: 1rem;
+        border-radius: 5px;
+        font-family: 'Open Sans',sans-serif;
+      }
+      
+      .login-btn:hover {
+        background-color: #8c27c2;
+        border: 2px solid #8c27c2;
+      }
+      
+      .login-message {
+        margin: 1rem 0;
+        width: initial;
+        background-color: #cf0a40;
+        color: whitesmoke;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 5px;
+      }
+  }
+  
+  

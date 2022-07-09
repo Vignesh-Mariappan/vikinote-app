@@ -1,0 +1,507 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+
+.notes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.notes * {
+  font-family: 'Open Sans',sans-serif;
+}
+
+.notes-notebook-sidebar {
+  width: 300px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  background-color: black;
+}
+
+.notes-notebook-sidebar .app-title {
+  color: #8c27c2;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.notes-notebook-sidebar .notes-notebook {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 83%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-user {
+  font-weight: 100;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebooks {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebooks span {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebooks .fa-plus {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebooks .fa-plus:hover {
+  border-radius: 100%;
+  background-color: #555;
+  color: #6cd97e;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebook-list {
+  list-style: none;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  padding: 0;
+  width: 100%;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebook-list .notes-notebook-list-item {
+  padding: 10px;
+  padding-left: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebook-list .notes-notebook-list-item span {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebook-list .notes-notebook-list-item .fa-trash {
+  padding: 10px;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebook-list .notes-notebook-list-item .fa-trash:hover {
+  border-radius: 50%;
+  background-color: #dddddd;
+  color: #fe2020;
+}
+
+.notes-notebook-sidebar .notes-notebook .notes-notebook-list .notes-notebook-list-item-selected {
+  border-radius: 5px;
+  background-color: #7719AA;
+}
+
+@media screen and (max-width: 1060px) {
+  .notes-notebook-sidebar {
+    width: 275px;
+  }
+}
+
+.notes-sidebar {
+  border-right: 2px solid #dddddd;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  overflow-y: auto;
+  padding: 1em;
+  width: 300px;
+  background-color: whitesmoke;
+}
+
+@media screen and (max-width: 1060px) {
+  .notes-sidebar {
+    width: 250px;
+  }
+}
+
+.notes-sidebar-btn, .notes-logout-btn {
+  background: #7719AA;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0;
+  width: 100%;
+}
+
+.notes-logout-btn {
+  width: 90%;
+  display: inline-block;
+  margin-left: 5%;
+}
+
+.notes-sidebar-btn:hover, .notes-logout-btn:hover {
+  background: #8c27c2;
+}
+
+.notes-sidebar-list-item {
+  cursor: pointer;
+  border-bottom: 2px solid #dddddd;
+}
+
+.notes-sidebar-list-item-selected {
+  background: white;
+  border-radius: 7px;
+  font-weight: bold;
+  border-top: 0;
+}
+
+.small-note-title,
+.small-note-time {
+  padding: 10px;
+}
+
+.small-note-title {
+  font-size: 1.2rem;
+}
+
+.small-note-body {
+  padding: 0 10px;
+}
+
+.small-note-time {
+  color: #aaaaaa;
+  text-align: left;
+}
+
+.notes-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 2rem 1rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.notes-preview .notes-preview-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 0;
+  /*   gap: 1rem; */
+}
+
+.notes-preview .notes-preview-icons div {
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.notes-preview .notes-preview-icons div:hover {
+  background-color: #bfbfbf;
+}
+
+.notes-preview .section {
+  width: 100%;
+  border: 1px solid black;
+  height: auto;
+  border-radius: 5px;
+  min-height: 70px;
+  position: relative;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.notes-preview .section .fa-trash {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.notes-preview .section .fa-trash:hover {
+  border-radius: 50%;
+  background-color: #dddddd;
+  color: #fe2020;
+}
+
+.notes-preview .section .section-title-container {
+  padding: 1rem;
+  border-bottom: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notes-preview .section .section-title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  outline: 0px solid transparent;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.notes-preview .section .section-title [contenteditable] {
+  background-color: white;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  color: black !important;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1060px) {
+  .notes-preview .section .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .notes-preview .section .section-title {
+    font-size: 1.2rem;
+  }
+}
+
+.notes-preview .section .section-body {
+  padding: 1rem;
+  outline: 0px solid transparent;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1060px) {
+  .notes-preview .section .section-body {
+    font-size: 1rem;
+  }
+}
+
+.notes-preview-title,
+.notes-preview-body {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.notes-preview-title {
+  font-size: 2rem;
+  font-weight: bold;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  overflow: unset;
+}
+
+@media screen and (max-width: 1060px) {
+  .notes-preview-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .notes-preview-title {
+    font-size: 1.3rem;
+  }
+}
+
+.notes-preview-body {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  resize: none;
+}
+
+.create-nb-dialog {
+  font-family: 'Open Sans',sans-serif;
+  padding: 25px;
+  border-radius: 5px;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.create-nb-dialog .create-nb-dialog-title, .create-nb-dialog .create-nb-dialog-description {
+  padding: 0;
+  margin: 0;
+}
+
+.create-nb-dialog .dialog-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.create-nb-dialog .dialog-header .fa-xmark {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.create-nb-dialog .dialog-header .fa-xmark:hover {
+  border-radius: 50%;
+  background-color: whitesmoke;
+  color: #fe2020;
+}
+
+.create-nb-dialog div {
+  font-weight: bold;
+}
+
+.create-nb-dialog input {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  padding: 1rem;
+  background-color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.create-nb-dialog button {
+  padding: 10px 20px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  background-color: #7719AA;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+.create-nb-dialog button:hover {
+  background-color: #8c27c2;
+}
+
+.create-nb-dialog button:disabled {
+  background-color: #aaaaaa;
+  cursor: not-allowed;
+}
+
+.overlay {
+  position: fixed;
+  /* Sit on top of the page content */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.desktop-only-support-ui {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: #555;
+}
+
+.desktop-only-support-ui .fallback-ui-card {
+  width: 325px;
+  height: 400px;
+  padding: .5rem;
+  background-color: black;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-family: 'Open Sans',sans-serif;
+}
+
+.desktop-only-support-ui .fallback-ui-card .fa-face-frown {
+  font-size: 5rem;
+  padding-top: 2.5rem;
+  color: white;
+}
+
+.desktop-only-support-ui .fallback-ui-card h1, .desktop-only-support-ui .fallback-ui-card h3, .desktop-only-support-ui .fallback-ui-card h4 {
+  text-align: center;
+  color: white;
+}
+
+.desktop-only-support-ui .fallback-ui-card h3 {
+  padding: 0;
+  margin: 0;
+}
+/*# sourceMappingURL=style.css.map */

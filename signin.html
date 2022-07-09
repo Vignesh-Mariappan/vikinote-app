@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MyWorkbookApp Login</title>
+  <link href="signin.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <form class = "signin-form" action="javascript:signinFormSubmit()" method="post">
+    <h1>MyWorkbookApp Sign In</h1>
+    <label for="signin-username">Username</label>
+    <input type="text" id="signin-username" name="username" required>
+    <label for="signin-password">Password</label>
+    <input type="password" id="signin-password" name="password" required />
+    <label for="signin-confirm-password ">Confirm Password</label>
+    <input type="password" id="signin-confirm-password" name="confirm-password" required />
+    <button type="submit" class="signin-btn">Sign In</button>
+    <div class="login-btn">
+      <span>Already an existing User?</span>
+      <a href="/login.html">Login</a>
+    </div>
+     <div class="signin-message" style="display:none"></div>
+     <div class="signin-success-message" style="display:none"></div>
+  </form> 
+  <script src="./js/signin.js"></script>
+</body>
+
+</html>

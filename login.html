@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MyWorkbookApp Login</title>
+  <link href="login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+   
+   <form class = "login-form" action="javascript:loginFormSubmit()" method="post">
+    <h1>MyWorkbookApp Login</h1>
+    <label for="login-username">Username</label><br>
+    <input type="text" id="login-username" name="username" required><br>
+    <label for="login-password">Password</label><br>
+    <input type="password" id="login-password" name="password" required>
+    <div class="login-form-btns">
+      <a href="signin.html">Sign In</a>
+      <button type="submit" class="login-btn">Log In</button>
+    </div>
+     <div class="login-message" style="display:none">Username is already taken</div>
+  </form> 
+
+  <script src="./js/login.js"></script>
+</body>
+
+</html>
