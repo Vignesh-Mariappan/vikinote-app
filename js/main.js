@@ -70,7 +70,7 @@ function selectedNote(notesOfSelectedNB) {
  */
 function setNotesUser() {
   if (!currentUser) {
-    window.location.href = 'https://vignesh-mariappan.github.io/login.html';
+    window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
     return;
   }
   notesUser.textContent = currentUser;

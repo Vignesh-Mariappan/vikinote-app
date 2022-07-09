@@ -41,7 +41,7 @@ function signinFormSubmit() {
     signInSuccessMessage.textContent = 'User successfully created';
     signInSuccessMessage.style.display = 'block';
 
-    // Show the success message for 2 seconds
+    // Show the success message for 3 seconds
     setTimeout(() => {
       // clear the input fields
       signInUsernameEl.value = '';
@@ -49,7 +49,7 @@ function signinFormSubmit() {
       signInConfirmPasswordEl.value = '';
       signInSuccessMessage.style.display = 'none';
       // redirect it to the login page
-      window.location.href = 'https://vignesh-mariappan.github.io/login.html';
+      window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
     }, 3000);
   }
 }
