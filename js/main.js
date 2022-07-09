@@ -195,9 +195,10 @@ function checkAndCreateNotesData() {
       user: currentUser,
       notebooks: [],
     };
-    localStorage.setItem(currentUser, JSON.stringify(newData));
-
-    notesData = JSON.parse(localStorage.getItem(currentUser) || '{}');
+    if (currentUser) {
+      localStorage.setItem(currentUser, JSON.stringify(newData));
+      notesData = JSON.parse(localStorage.getItem(currentUser) || '{}');
+    }
   }
 
   loadNotebooks();
