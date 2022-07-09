@@ -70,7 +70,7 @@ function selectedNote(notesOfSelectedNB) {
  */
 function setNotesUser() {
   if (!currentUser) {
-    window.location.href = '/login.html';
+    window.location.href = 'https://vignesh-mariappan.github.io/login.html';
     return;
   }
   notesUser.textContent = currentUser;
@@ -206,8 +206,6 @@ function checkAndCreateNotesData() {
 function loadNotebooks() {
   //   notesData = JSON.parse(localStorage.getItem(currentUser) || '{}');
 
-  //   console.log(notesData);
-
   notebookListEl.textContent = '';
 
   if (notesData.notebooks.length > 0) {
@@ -316,7 +314,6 @@ function addNewNotebook() {
 }
 
 function nbListItemClickHandler(event) {
-  // console.log(event.target.textContent);
   let nbClicked = event.target; // span element inside the li element>
 
   if (nbClicked.classList.contains('fa-trash')) {
@@ -350,20 +347,14 @@ function nbListItemClickHandler(event) {
 }
 
 function notesSidebarListClickHandler(event) {
-  // console.log(event.target.closest('.notes-sidebar-list-item').dataset.id);
-
   // clicked small note
   let clickedSmallNote = event.target.closest('.notes-sidebar-list-item');
 
   // iterate the notesData and find the notes inside the selected nb
   let notesOfSelectedNB = selectedNBData().notes;
 
-  console.log({ notesOfSelectedNB });
-
   // find the note information that is clicked inside the notes array
   let noteInfo = notesOfSelectedNB.find((note) => note.notesId === parseInt(clickedSmallNote.dataset.id));
-
-  console.log(noteInfo);
 
   // modify the title of the preview with the note info
   // modify the text area of the preview
@@ -422,7 +413,6 @@ function saveNote() {
   // set the updated array to the selected note of the selected notebook
   notesOfSelectedNB = notesOfSelectedNB.map((note) => {
     if (selectedNoteId === note.notesId) {
-      console.log(notesPreviewEl);
       note.title = notesPreviewEl.children[0].textContent;
       note.body = sectionUpdates;
       note.time = new Date().toISOString();
@@ -473,8 +463,6 @@ function createNbNameBoxChangeHandler(event) {
 }
 
 function createNbDialogBtnElHandler(event) {
-  console.log(createNbDialogNameTextEl.value);
-
   notesData.notebooks.push({
     notebookId: new Date().getTime(),
     notebookTitle: createNbDialogNameTextEl.value,
@@ -684,8 +672,6 @@ notesPreviewEl.onpaste = (event) => {
 };
 
 function reportWindowSize() {
-  console.log(window.innerWidth);
-
   if (window.innerWidth <= 850) {
     overlayEl.style.display = 'none';
     document.querySelector('.desktop-only-support-ui').style.display = 'block';
@@ -695,10 +681,12 @@ function reportWindowSize() {
   }
 }
 
+// On refresh function calls
 setNotesUser();
 checkAndCreateNotesData();
 reportWindowSize();
 
+// Event Listeners
 notebookListEl.addEventListener('click', nbListItemClickHandler);
 notesSidebarListEl.addEventListener('click', notesSidebarListClickHandler);
 notesSidebarBtnEl.addEventListener('click', notesSidebarBtnClickHandler);

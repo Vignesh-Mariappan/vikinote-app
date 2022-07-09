@@ -30,6 +30,6 @@ function loginFormSubmit(event) {
     loginUsernameEl.textContent = '';
     loginPasswordEl.textContent = '';
     localStorage.setItem('currentUser', user.username);
-    window.location.href = '/index.html';
+    window.location.href = 'https://vignesh-mariappan.github.io/index.html';
   }
 }

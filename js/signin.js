@@ -49,7 +49,7 @@ function signinFormSubmit() {
       signInConfirmPasswordEl.value = '';
       signInSuccessMessage.style.display = 'none';
       // redirect it to the login page
-      window.location.href = '/login.html';
+      window.location.href = 'https://vignesh-mariappan.github.io/login.html';
     }, 3000);
   }
 }
