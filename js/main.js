@@ -538,7 +538,7 @@ function notesPreviewClickHandler(event) {
 
 function userLogOutBtnClickHandler(event) {
   localStorage.setItem('currentUser', '');
-  window.location.href = '/login.html';
+  window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
 }
 
 /* Section changes */
