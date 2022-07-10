@@ -193,25 +193,37 @@ function loadSmallNotesOfSelectedNB() {
  * @returns none
  */
 function checkAndCreateNotesData() {
+  // get the notesData from the local storage
   notesData = JSON.parse(localStorage.getItem(currentUser) || '{}');
 
+  // if there is no notesData exists for current user (may be new user), create one for the user
   if (Object.entries(notesData).length === 0) {
     let newData = {
       user: currentUser,
       notebooks: [],
     };
+    // set the newData created for the current user in the local storage and set it to notesData again
     if (currentUser) {
       localStorage.setItem(currentUser, JSON.stringify(newData));
       notesData = JSON.parse(localStorage.getItem(currentUser) || '{}');
     }
   }
 
+  // if the notesData exists already for the user load the loadNoteBooks
   loadNotebooks();
 }
 
+/**
+ * @author Vignesh
+ * @function loadNotebooks
+ * @description this function is used to load all the notebooks of the current user using the notesData of the current user
+ * @param none
+ * @returns none
+ */
 function loadNotebooks() {
   //   notesData = JSON.parse(localStorage.getItem(currentUser) || '{}');
 
+  // clear the existing data before creating everything from the beginning
   notebookListEl.textContent = '';
 
   if (notesData.notebooks.length > 0) {
@@ -256,17 +268,27 @@ function loadNotebooks() {
       notebookListEl.append(notebookListItem);
     });
   } else {
+    // if there are no notebooks present for the current user, donot show the add note button to the user
     notesSidebarBtnEl.style.display = 'none';
   }
 
+  // load the sidebar small notes for the selected notebook, selected notebook will be the first notebook of all the notebooks
   loadSmallNotesOfSelectedNB();
 }
 
+/**
+ * @author Vignesh
+ * @function addNewNotebook
+ * @description this function is used to create a new notebook
+ * @param none
+ * @returns none
+ */
 function addNewNotebook() {
   // notebookListEl
   let notebook = notesData.notebooks[notesData.notebooks.length - 1];
 
   let selectedNotebook = Array.from(notebookListEl.children).find((nbListItem) => nbListItem.classList.contains('notes-notebook-list-item-selected'));
+
   // remove the selected class from the selected nb
   if (selectedNotebook) selectedNotebook.classList.remove('notes-notebook-list-item-selected');
 
@@ -319,14 +341,25 @@ function addNewNotebook() {
   overlayEl.style.pointerEvents = 'auto';
 }
 
+/**
+ * @author Vignesh
+ * @function nbListItemClickHandler
+ * @description this function is used to handle the clicks in the notebook, if the user clicks the trash icon of the notebook, it will delete the notebook, otherwise it will select the particular notebook and load the notes
+ * @param {object} event
+ * @returns none
+ */
 function nbListItemClickHandler(event) {
-  let nbClicked = event.target; // span element inside the li element>
+  let nbClicked = event.target;
 
+  // if trash icon of the notebook is clicked
   if (nbClicked.classList.contains('fa-trash')) {
+    // find the id of the notebook from the DOM
     let notebookToDeleteId = nbClicked.closest('.notes-notebook-list-item').dataset.id;
 
+    // find the index of the notebook from the notesData
     let notebookToDeleteIndex = notesData.notebooks.findIndex((notebook) => notebook.notebookId === notebookToDeleteId);
 
+    // splice the notebook from the notesData
     notesData.notebooks.splice(notebookToDeleteIndex, 1);
 
     // set it to the local storage for the current user
@@ -335,12 +368,15 @@ function nbListItemClickHandler(event) {
     // set the new notesData from the local storage
     notesData = JSON.parse(localStorage.getItem(currentUser));
 
+    // load all the notebooks after delete in order to be in sync with the local storage
     loadNotebooks();
   } else {
+    // find the selected notebook
     let selectedNotebook = Array.from(notebookListEl.children).find((nbListItem) => nbListItem.classList.contains('notes-notebook-list-item-selected'));
 
+    // if the already selected notebook and the newly selected notebook aren't same
     if (selectedNotebook.dataset.id !== nbClicked.closest('.notes-notebook-list-item').dataset.id) {
-      // remove the selected class from the selected nb
+      // remove the selected class from the already selected nb
       selectedNotebook.classList.remove('notes-notebook-list-item-selected');
 
       // add the selected class to the notebook clicked
@@ -352,6 +388,13 @@ function nbListItemClickHandler(event) {
   }
 }
 
+/**
+ * @author Vignesh
+ * @function notesSidebarListClickHandler
+ * @description this function is used to handle the clicks in the notes from the notes sidebar.
+ * @param {object} event
+ * @returns none
+ */
 function notesSidebarListClickHandler(event) {
   // clicked small note
   let clickedSmallNote = event.target.closest('.notes-sidebar-list-item');
@@ -373,6 +416,13 @@ function notesSidebarListClickHandler(event) {
   clickedSmallNote.classList.add('notes-sidebar-list-item-selected');
 }
 
+/**
+ * @author Vignesh
+ * @function notesSidebarBtnClickHandler
+ * @description this function is used to handle the click of the add note button in the notes sidebar
+ * @param {object} event
+ * @returns none
+ */
 function notesSidebarBtnClickHandler(event) {
   // find the notes of selected notebook in the notesData array
   let notesOfSelectedNB = selectedNBData().notes;
@@ -395,12 +445,23 @@ function notesSidebarBtnClickHandler(event) {
   loadSmallNotesOfSelectedNB();
 }
 
+/**
+ * @author Vignesh
+ * @function saveNote
+ * @description this function is used to save the notes content to the storage when the user either pressed the keys Ctrl + s(windows) / Cmd + s(Mac) or clicked the save icon present in the toolbar of the note after modifications
+ * @param {object} event
+ * @returns none
+ */
 function saveNote() {
+  // find the note that is selected
   let selectedNote = Array.from(notesSidebarListEl.children).find((listItem) => listItem.classList.contains('notes-sidebar-list-item-selected'));
 
+  // find the id of the selected note
   let selectedNoteId = parseInt(selectedNote.dataset.id);
 
+  // get the notes of selectd notebook from the notesData
   let notesOfSelectedNB = selectedNBData().notes;
+
   // updated array of section objects
   let sectionUpdates = [];
 
@@ -433,33 +494,74 @@ function saveNote() {
   // set the new notesData from the local storage
   notesData = JSON.parse(localStorage.getItem(currentUser));
 
+  // load the small notes of selected notebook after storing the new updates in storage
   loadSmallNotesOfSelectedNB();
 }
 
+/**
+ * @author Vignesh
+ * @function saveKeysPressedHandler
+ * @description this function is used to save the notes content to the storage when the user pressed the keys Ctrl + s(windows) / Cmd + s(Mac) after modifications in a note
+ * @param {object} event
+ * @returns none
+ */
 function saveKeysPressedHandler(event) {
+  // checking whether the user is using Mac or Windows and check the keys pressed Ctrl(windows) and Cmd(Mac)
   if ((window.navigator.platform.match('Mac') ? event.metaKey : event.ctrlKey) && event.keyCode == 83) {
+    // this is to stop the dialog getting opened when the user pressed the save keys in the keyboard
     event.preventDefault();
 
+    // save the note
     saveNote();
   }
 }
 
+/**
+ * @author Vignesh
+ * @function newNbIconClickHandler
+ * @description this function is used to handle the new note book icon click by the user to create the new notebook
+ * @param {object} event
+ * @returns none
+ */
 function newNbIconClickHandler(event) {
+  // show the dialog
   createNbDialogEl.style.display = 'flex';
+
+  // display the overlay so that the user cannot click the other buttons of the application when the create new notebook dialog is opened
   overlayEl.style.visiblity = 'visible';
   overlayEl.style.pointerEvents = 'none';
+
+  // the text in the textbox should be empty and the create button is disabled by default
   createNbDialogNameTextEl.value = '';
   createNbDialogBtnEl.setAttribute('disabled', 'true');
 }
 
+/**
+ * @author Vignesh
+ * @function closeNbDialogIconClickHandler
+ * @description this function is used to handle the cross icon in the create new notebook dialog
+ * @param {object} event
+ * @returns none
+ */
 function closeNbDialogIconClickHandler(event) {
+  // hide the new notebook create dialog
   createNbDialogEl.style.display = 'none';
+  // clear the values in the text box and disable the create button
   createNbDialogNameTextEl.value = '';
   createNbDialogBtnEl.setAttribute('disabled', 'true');
+
+  // hide the overlay
   overlayEl.style.visiblity = 'hidden';
   overlayEl.style.pointerEvents = 'auto';
 }
 
+/**
+ * @author Vignesh
+ * @function createNbNameBoxChangeHandler
+ * @description this function is used to handle the input change in the text box of the create new notebook dialog. If the user types more than four letters in the text box it will enable the create button otherwise disabled.
+ * @param {object} event
+ * @returns none
+ */
 function createNbNameBoxChangeHandler(event) {
   if (event.target.value.length >= 4) {
     createNbDialogBtnEl.removeAttribute('disabled');
@@ -468,7 +570,15 @@ function createNbNameBoxChangeHandler(event) {
   }
 }
 
+/**
+ * @author Vignesh
+ * @function createNbDialogBtnElHandler
+ * @description this function is used to create the new notebook in the storage and update the UI
+ * @param {object} event
+ * @returns none
+ */
 function createNbDialogBtnElHandler(event) {
+  // create new notebook and push it to the notebooks in the notesData
   notesData.notebooks.push({
     notebookId: new Date().getTime(),
     notebookTitle: createNbDialogNameTextEl.value,
@@ -477,22 +587,33 @@ function createNbDialogBtnElHandler(event) {
 
   // set in local storage
   localStorage.setItem(currentUser, JSON.stringify(notesData));
-
   notesData = JSON.parse(localStorage.getItem(currentUser));
 
   // add new notebook to the view
   addNewNotebook();
 }
 
+/**
+ * @author Vignesh
+ * @function deleteNote
+ * @description this function is used to delete the note from the notes of the selected notebook
+ * @param none
+ * @returns none
+ */
 function deleteNote() {
+  // find the selected note from the sidebar
   let selectedNote = Array.from(notesSidebarListEl.children).find((listItem) => listItem.classList.contains('notes-sidebar-list-item-selected'));
 
+  // get the id of the selected notes
   let selectedNoteId = parseInt(selectedNote.dataset.id);
 
+  // get the notes of the selected notebook
   let notesOfSelectedNB = selectedNBData().notes;
 
+  // filter the other notes
   notesOfSelectedNB = notesOfSelectedNB.filter((note) => selectedNoteId !== note.notesId);
 
+  // set it to the notes array of the notesData
   selectedNBData().notes = notesOfSelectedNB;
 
   // set it to the local storage for the current user
@@ -501,9 +622,17 @@ function deleteNote() {
   // set the new notesData from the local storage
   notesData = JSON.parse(localStorage.getItem(currentUser));
 
+  // load the UI after saving the data in the storage
   loadSmallNotesOfSelectedNB();
 }
 
+/**
+ * @author Vignesh
+ * @function downloadNoteAsPDF
+ * @description this function is used to save the current note as PDF
+ * @param none
+ * @returns none
+ */
 function downloadNoteAsPDF() {
   let noteTitle = notesPreviewEl.children[0].textContent;
   let doc = new jsPDF('p', 'in', 'a4');
@@ -528,26 +657,50 @@ function downloadNoteAsPDF() {
   //   });
 }
 
+/**
+ * @author Vignesh
+ * @function notesPreviewClickHandler
+ * @description this function is used handle the clicks of the icons present in the toolbar of the notes preview
+ * @param {object} event
+ * @returns none
+ */
 function notesPreviewClickHandler(event) {
-  // save note button click
+  // new section icon click
   if (event.target.closest('div').classList.contains('notes-preview-section')) {
     newSectionElClickHandler(event);
-  } else if (event.target.closest('div').classList.contains('notes-preview-save')) {
+  } /* save note icon click */ else if (event.target.closest('div').classList.contains('notes-preview-save')) {
     saveNote(event);
-  } else if (event.target.closest('div').classList.contains('notes-preview-delete')) {
+  } /* delete note icon click */ else if (event.target.closest('div').classList.contains('notes-preview-delete')) {
     deleteNote();
-  } else if (event.target.closest('div').classList.contains('notes-preview-download')) {
+  } /* download note icon click */ else if (event.target.closest('div').classList.contains('notes-preview-download')) {
     downloadNoteAsPDF();
   }
 }
 
+/**
+ * @author Vignesh
+ * @function userLogOutBtnClickHandler
+ * @description this function is used when the user clicks the log out button of the app
+ * @param {object} event
+ * @returns none
+ */
 function userLogOutBtnClickHandler(event) {
+  // set the current user to null
   localStorage.setItem('currentUser', '');
+
+  // redirect to login page
   window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
   // window.location.href = '/login.html';
 }
 
 /* Section changes */
+/**
+ * @author Vignesh
+ * @function newSectionElClickHandler
+ * @description this function is used when the user clicks the add new section icon in the toolbar of the notes
+ * @param none
+ * @returns none
+ */
 function newSectionElClickHandler() {
   // create a new section
   let section = {
@@ -560,8 +713,10 @@ function newSectionElClickHandler() {
   let selectedNB = selectedNBData();
 
   if (selectedNB && selectedNB.notes && selectedNB.notes.length > 0) {
+    // find the notes of the selected notebook
     let notesOfSelectedNB = selectedNB.notes;
 
+    // find the selected note of the selected notes
     let selectedNoteOfSelectedNB = selectedNote(notesOfSelectedNB);
 
     // push the section to the body of the selected note of the selected note book
@@ -578,6 +733,13 @@ function newSectionElClickHandler() {
   }
 }
 
+/**
+ * @author Vignesh
+ * @function deleteSection
+ * @description this function is used when the user clicks the delete section icon in the toolbar of the notes
+ * @param {object} event
+ * @returns none
+ */
 function deleteSection(event) {
   // find the section ID to delete
   let sectionToDelete = event.target.closest('.section');
@@ -606,6 +768,13 @@ function deleteSection(event) {
   notesData = JSON.parse(localStorage.getItem(currentUser));
 }
 
+/**
+ * @author Vignesh
+ * @function createSection
+ * @description this function is used to create the section in the UI
+ * @param {object} section - section information from the notesData will be passed as an argument
+ * @returns none
+ */
 function createSection(section) {
   // create a section div
   // add the id to the section div
@@ -643,12 +812,15 @@ function createSection(section) {
   notesPreviewEl.children[2].append(sectionDivEl);
 }
 
+// click event listener for the DOM element notesPreviewEl
 notesPreviewEl.addEventListener('click', (event) => {
+  // if the user clicked the trash icon of the section
   if (event.target.classList.contains('fa-trash')) {
     deleteSection(event);
   }
 });
 
+// keydown event listener for the DOM element notesPreviewEl
 notesPreviewEl.addEventListener('keydown', (event) => {
   if (event.target.classList[0] === 'section-title') {
     if (event.key === 'Enter') {
@@ -665,8 +837,10 @@ notesPreviewEl.addEventListener('keydown', (event) => {
   }
 });
 
+// paste event listener for the DOM element notesPreviewEl
 notesPreviewEl.onpaste = (event) => {
-  if (event.target.classList[0] === 'section-body' || event.target.classList.contains('section-title')) {
+  // paste only the text
+  if (event.target.classList[0] === 'section-body') {
     event.preventDefault();
     var text = event.clipboardData.getData('text/plain');
     event.target.textContent += text;
@@ -678,6 +852,13 @@ notesPreviewEl.onpaste = (event) => {
   }
 };
 
+/**
+ * @author Vignesh
+ * @function reportWindowSize
+ * @description this function is used to either show the fallback UI if the window size is leff than 850px
+ * @param none
+ * @returns none
+ */
 function reportWindowSize() {
   if (window.innerWidth <= 850) {
     overlayEl.style.display = 'none';
