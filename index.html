@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes App</title>
+    <title>MyWorkbook</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    
 </head>
 <body>
-
+    <!-- Overlay when the user opens the create new notebook dialog, when the dialog is opened, the other clickable items in the homepage becomes not clickable -->
     <div class="overlay" style="visiblity: hidden;">
         <div class="notes" id="app">
             <div class="notes-notebook-sidebar">
@@ -23,7 +23,10 @@
                     <div class="notes-notebooks">
                         <i class="fa-solid fa-book"></i>
                         <span>Notebooks</span>
-                        <i class="fa-solid fa-plus"></i>
+                        <div>
+                            <i class="fa-solid fa-plus"></i>
+                            <span class="tooltip-text">Create a new notebook</i>
+                        </div>
                     </div>
                     <ul class="notes-notebook-list">
                         <!-- <li class="notes-notebook-list-item"><i class="fa-solid fa-layer-group" style="padding-right: 10px;"></i>HTML 5</li>
@@ -69,6 +72,7 @@
             </div>
         </div>
     </div>
+    <!-- Create new notebook dialog -->
     <div class = "create-nb-dialog" style="display: none;">
         <div class="dialog-header">
             <h2 class="create-nb-dialog-title">Create a new notebook</h2>
@@ -79,17 +83,19 @@
         <input type = "text" />
         <button type="button" class="create-nb-dialog-btn" disabled>Create</button>
     </div>
+    <!-- Fallback UI if the user tries to access the app in mobile, minimum tablet is required -->
     <div class="desktop-only-support-ui" style = "display: none;">
         <div class = "fallback-ui-card">
             <i class="fa-solid fa-face-frown"></i>
-            <h1>Woops!!!</h1>
-            <h3>MyWorkbook currently supports only on Desktop <i class="fa-solid fa-desktop"></i></h3>
-            <h4>Mobile<i class="fa-solid fa-mobile"></i> version is coming soon!!!</h4>
+            <h1>Oops!!!</h1>
+            <h3>MyWorkbook currently supports only on Desktops & Tabs <i class="fa-solid fa-desktop"></i></h3>
+            <h4>Mobile <i class="fa-solid fa-mobile"></i> version is coming soon!!!</h4>
         </div>
     </div>
 
 
     <!-- Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js" integrity="sha512-M72KfQy4kPuLYC6CeTrN0eA17U1lXEMrr5qEJC/40CLdZGC3HpwPS0esQLqBHnxty2FIcuNdP9EqwSOCLEVJXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://kit.fontawesome.com/020c091134.js" crossorigin="anonymous"></script>

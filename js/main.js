@@ -71,6 +71,7 @@ function selectedNote(notesOfSelectedNB) {
 function setNotesUser() {
   if (!currentUser) {
     window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
+    // window.location.href = '/login.html';
     return;
   }
   notesUser.textContent = currentUser;
@@ -94,15 +95,19 @@ function loadSelectedNoteInPreview(note) {
     <div class="notes-preview-icons">
     <div class="notes-preview-section">
         <i class="fa-solid fa-plus"></i>
+        <span class="tooltip-text">Add a new section</span>
       </div>
     <div class="notes-preview-save">
       <i class="fa-solid fa-floppy-disk"></i>
+      <span class="tooltip-text">Save the changes</span>
     </div>
     <div class="notes-preview-download" style=${style}>
       <i class="fa-solid fa-download"></i>
+      <span class="tooltip-text">Download the note as PDF</span>
     </div>
     <div class="notes-preview-delete">
       <i class="fa-solid fa-trash"></i>
+      <span class="tooltip-text">Delete the note</span>
     </div>
   </div>
   <div class = "notes-preview-body"></div>
@@ -539,6 +544,7 @@ function notesPreviewClickHandler(event) {
 function userLogOutBtnClickHandler(event) {
   localStorage.setItem('currentUser', '');
   window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
+  // window.location.href = '/login.html';
 }
 
 /* Section changes */
@@ -575,10 +581,10 @@ function newSectionElClickHandler() {
 function deleteSection(event) {
   // find the section ID to delete
   let sectionToDelete = event.target.closest('.section');
-  let sectionIdToDelete = sectionToDelete.dataset.id;
+  let sectionIdToDelete = parseInt(sectionToDelete.dataset.id);
 
   // Remove from UI
-  notesPreviewEl.children[2].removeChild(event.target.closest('.section'));
+  notesPreviewEl.children[2].removeChild(sectionToDelete);
 
   // find the selected notebook
   let selectedNB = selectedNBData();
@@ -588,7 +594,7 @@ function deleteSection(event) {
   let selectedNoteOfSelectedNB = selectedNote(notesOfSelectedNB);
 
   // Filter the section from the body array of the selected note of the selected notebook
-  let filteredSectionArray = selectedNoteOfSelectedNB.body.filter((section) => section.sectionId !== sectionIdToDelete);
+  let filteredSectionArray = selectedNoteOfSelectedNB.body.filter((section) => parseInt(section.sectionId) !== sectionIdToDelete);
 
   // set the new array to the selected note of the selected notebook after delete
   selectedNoteOfSelectedNB.body = [...filteredSectionArray];

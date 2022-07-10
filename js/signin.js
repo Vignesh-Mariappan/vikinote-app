@@ -1,12 +1,21 @@
 // @ts-nocheck
+// DOM elements
 var signInUsernameEl = document.querySelector('#signin-username');
 var signInPasswordEl = document.querySelector('#signin-password');
 var signInConfirmPasswordEl = document.querySelector('#signin-confirm-password');
 var signInMessage = document.querySelector('.signin-message');
 var signInSuccessMessage = document.querySelector('.signin-success-message');
 // @ts-ignore
+// Get the users from local storage
 var users = JSON.parse(localStorage.getItem('users') || '[]');
 
+/**
+ * @author Vignesh
+ * @function displayMessage
+ * @description this function is used to display the error message in the signin form for three seconds and it disappears
+ * @param {string} text - text to be displayed in the error message
+ * @returns none
+ */
 function displayMessage(text) {
   signInMessage.textContent = text;
   signInMessage.style.display = 'block';
@@ -16,6 +25,13 @@ function displayMessage(text) {
   }, 3000);
 }
 
+/**
+ * @author Vignesh
+ * @function signinFormSubmit
+ * @description When the user submits the signin form, the following method will check the details entered and create a new user in the App and the app will be redirected to login form, if the entered details are wrong, error message will be shown to the user
+ * @param {object} event
+ * @returns none
+ */
 function signinFormSubmit() {
   let user = users.find((user) => user.username === signInUsernameEl.value);
 
@@ -50,6 +66,7 @@ function signinFormSubmit() {
       signInSuccessMessage.style.display = 'none';
       // redirect it to the login page
       window.location.href = 'https://vignesh-mariappan.github.io/vikinote-app/login.html';
+      // window.location.href = '/login.html';
     }, 3000);
   }
 }
